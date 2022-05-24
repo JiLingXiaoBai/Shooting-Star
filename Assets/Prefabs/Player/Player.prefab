@@ -29180,6 +29180,7 @@ GameObject:
   - component: {fileID: 3713945990170911821}
   - component: {fileID: 5430800570543970807}
   - component: {fileID: 6651437931810521182}
+  - component: {fileID: 1212879024}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -29257,8 +29258,6 @@ MonoBehaviour:
   accelerationTime: 0.35
   decelerationTime: 0.75
   moveRotationAngle: 20
-  paddingX: 0.8
-  paddingY: 0.22
   projectile1: {fileID: 4945262017951894932, guid: f404b5d5bfdf7f743af17a44cf961d68,
     type: 3}
   projectile2: {fileID: 4945262017951894932, guid: c875175f376589a46a2aba2d90a3c273,
@@ -29336,6 +29335,25 @@ MonoBehaviour:
   offSFX:
     audioClip: {fileID: 8300000, guid: af7991e526977a144b102a04e5366c12, type: 3}
     volume: 3
+--- !u!114 &1212879024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6435389010079767255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d0b1c397b0dce843830d79831aa6bf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultAmount: 5
+  cooldownTime: 3
+  missilePrefab: {fileID: 2523096243714385163, guid: 1b2c3ab1e0e61914ba3e10d026ca3023,
+    type: 3}
+  launchSFX:
+    audioClip: {fileID: 8300000, guid: 99331d0df4c708149b69b11b5a64d2f4, type: 3}
+    volume: 0.5
 --- !u!1 &6758096032694626173
 GameObject:
   m_ObjectHideFlags: 0

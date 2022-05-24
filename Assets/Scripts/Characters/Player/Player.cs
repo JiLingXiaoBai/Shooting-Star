@@ -64,10 +64,13 @@ public class Player : Character
     new Rigidbody2D rigidbody;
     new Collider2D collider;
 
+    MissileSystem missile;
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
+        missile = GetComponent<MissileSystem>();
 
         var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
         paddingX = size.x / 2f;
@@ -91,6 +94,7 @@ public class Player : Character
         input.onStopFire += StopFire;
         input.onDodge += Dodge;
         input.onOverdrive += Overdrive;
+        input.onLaunchMissile += LaunchMissile;
 
         PlayerOverdrive.on += OverdriveOn;
         PlayerOverdrive.off += OverdriveOff;
@@ -104,6 +108,7 @@ public class Player : Character
         input.onStopFire -= StopFire;
         input.onDodge -= Dodge;
         input.onOverdrive -= Overdrive;
+        input.onLaunchMissile -= LaunchMissile;
 
         PlayerOverdrive.on -= OverdriveOn;
         PlayerOverdrive.off -= OverdriveOff;
@@ -299,6 +304,15 @@ public class Player : Character
         isOverdriving = false;
         dodgeEnergyCost /= overdriveDodgeFactor;
         moveSpeed /= overdriveSpeedFactor;
+    }
+
+    #endregion
+
+    #region LAUNCH MISSILE
+
+    void LaunchMissile()
+    {
+        missile.Launch(muzzleMiddle);
     }
 
     #endregion

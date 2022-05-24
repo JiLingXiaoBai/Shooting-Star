@@ -6,14 +6,14 @@ public class Projectile : MonoBehaviour
     [SerializeField] AudioData[] hitSFX;
     [SerializeField] GameObject hitVFX;
     [SerializeField] float damage;
-    [SerializeField] float moveSpeed = 10f;
+    [SerializeField] protected float moveSpeed = 10f;
     [SerializeField] protected Vector2 moveDirection;
 
     protected GameObject target;
 
     protected virtual void OnEnable()
     {
-        StartCoroutine(MoveDirectly());
+        StartCoroutine(nameof(MoveDirectly));
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
