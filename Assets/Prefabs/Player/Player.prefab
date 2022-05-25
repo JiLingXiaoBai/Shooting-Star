@@ -44138,6 +44138,11 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8415113229897126444, guid: af55e250b16a7b6468ce6257574c2395,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: bdd3e51c8a5c7cd43a1c6340e9bfda13, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af55e250b16a7b6468ce6257574c2395, type: 3}
 --- !u!114 &1306315525484729145 stripped

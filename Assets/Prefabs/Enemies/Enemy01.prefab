@@ -51,8 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c46b6f9a6531142a9a06c98a1c8293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paddingX: 0.8
-  paddingY: 0.4
   moveSpeed: 1.5
   moveRotationAngle: 25
   projectiles:
@@ -89,6 +87,7 @@ MonoBehaviour:
   maxHealth: 12
   showOnHeadHealthBar: 1
   onHeadHealthBar: {fileID: 481460664191527439}
+  scorePoint: 100
   deathEnergyBonus: 5
 --- !u!50 &136736493
 Rigidbody2D:
@@ -14835,6 +14834,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI Health Bar On Head Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8415113229869839723, guid: 2d4a7202b7ef2be4aabeee2840fbbb01,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d4a7202b7ef2be4aabeee2840fbbb01, type: 3}
