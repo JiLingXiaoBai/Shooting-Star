@@ -10,17 +10,17 @@ public class EnemyController : MonoBehaviour
 
 
     [Header("---- FIRE ----")]
-    [SerializeField] GameObject[] projectiles;
-    [SerializeField] AudioData[] projectileLaunchSFX;
-    [SerializeField] Transform muzzle;
-    [SerializeField] float minFireInterval;
-    [SerializeField] float maxFireInterval;
+    [SerializeField] protected GameObject[] projectiles;
+    [SerializeField] protected AudioData[] projectileLaunchSFX;
+    [SerializeField] protected Transform muzzle;
+    [SerializeField] protected float minFireInterval;
+    [SerializeField] protected float maxFireInterval;
 
     WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
     float paddingX;
     float paddingY;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         var size = transform.GetChild(0).GetComponent<Renderer>().bounds.size;
         paddingX = size.x / 2f;
@@ -63,7 +63,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    IEnumerator RandomlyFireCoroutine()
+    protected virtual IEnumerator RandomlyFireCoroutine()
     {
         while (gameObject.activeSelf)
         {

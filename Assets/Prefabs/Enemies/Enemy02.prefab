@@ -14643,18 +14643,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c46b6f9a6531142a9a06c98a1c8293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paddingX: 0.8
-  paddingY: 0.4
   moveSpeed: 1.2
   moveRotationAngle: 25
   projectiles:
   - {fileID: 1703672839181012212, guid: 5e1000be69fe38f4283a4101c0376814, type: 3}
   projectileLaunchSFX:
-  - audioClip: {fileID: 8300000, guid: 406abe6e803b244eca380af5865dc5cb, type: 3}
-    volume: 0.5
   - audioClip: {fileID: 8300000, guid: 56c2ee139e8c844ba9a3a17370e3b763, type: 3}
-    volume: 0.5
-  - audioClip: {fileID: 8300000, guid: 35644134c067099459f55ecfa2efd85d, type: 3}
     volume: 0.5
   muzzle: {fileID: 1660286057339441410}
   minFireInterval: 1
@@ -14681,6 +14675,7 @@ MonoBehaviour:
   maxHealth: 8
   showOnHeadHealthBar: 1
   onHeadHealthBar: {fileID: 3671458613104621949}
+  scorePoint: 100
   deathEnergyBonus: 4
 --- !u!50 &1268396659
 Rigidbody2D:

@@ -58,10 +58,6 @@ MonoBehaviour:
   projectileLaunchSFX:
   - audioClip: {fileID: 8300000, guid: 406abe6e803b244eca380af5865dc5cb, type: 3}
     volume: 0.5
-  - audioClip: {fileID: 8300000, guid: 56c2ee139e8c844ba9a3a17370e3b763, type: 3}
-    volume: 0.5
-  - audioClip: {fileID: 8300000, guid: 35644134c067099459f55ecfa2efd85d, type: 3}
-    volume: 0.5
   muzzle: {fileID: 5577613620176243463}
   minFireInterval: 0.5
   maxFireInterval: 3
