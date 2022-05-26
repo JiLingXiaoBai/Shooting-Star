@@ -49,6 +49,8 @@ public class Player : Character
     float currentRoll;
     float dodgeDuration;
     float t;
+
+    Vector2 moveDirection;
     Vector2 previousVelocity;
     Quaternion previousRotation;
 
@@ -130,6 +132,7 @@ public class Player : Character
         TimeController.Instance.BulletTime(slowMotionDuration);
         if (gameObject.activeSelf)
         {
+            Move(moveDirection);
             if (regenerateHealth)
             {
                 if (healthRegenerateCoroutine != null)
@@ -164,9 +167,9 @@ public class Player : Character
             StopCoroutine(moveCoroutine);
         }
 
+        moveDirection = moveInput.normalized;
         Quaternion moveRotation = Quaternion.AngleAxis(moveRotationAngle * moveInput.y, Vector3.right);
-
-        moveCoroutine = StartCoroutine(MoveCoroutine(accelerationTime, moveInput.normalized * moveSpeed, moveRotation));
+        moveCoroutine = StartCoroutine(MoveCoroutine(accelerationTime, moveDirection * moveSpeed, moveRotation));
         StopCoroutine(nameof(DecelerationCoroutine));
         StartCoroutine(nameof(MoveRangeLimitationCoroutine));
     }
