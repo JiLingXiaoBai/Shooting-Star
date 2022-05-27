@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : Character
 {
+    #region FIELDS
     [SerializeField] StatsBar_HUD statsBar_HUD;
     [SerializeField] bool regenerateHealth = true;
     [SerializeField] float healthRegenerateTime;
@@ -71,6 +72,17 @@ public class Player : Character
 
     MissileSystem missile;
 
+    #endregion
+
+    #region PROPERTIES
+
+    public bool IsFullHealth => health == maxHealth;
+
+    public bool IsFullPower => weaponPower == 2;
+
+    #endregion
+
+    #region UNITY EVENT FUNCTIONS
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -127,11 +139,13 @@ public class Player : Character
 
         input.EnableGameplayInput();
     }
+    #endregion
 
     #region HEALTH
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
+        PowerDown();
         statsBar_HUD.UpdateStats(health, maxHealth);
         TimeController.Instance.BulletTime(slowMotionDuration);
         if (gameObject.activeSelf)
@@ -328,11 +342,32 @@ public class Player : Character
 
     #endregion
 
-    #region LAUNCH MISSILE
+    #region MISSILE
 
     void LaunchMissile()
     {
         missile.Launch(muzzleMiddle);
+    }
+
+    public void PickUpMissile()
+    {
+        missile.PickUp();
+    }
+
+    #endregion
+
+    #region WEAPON POWER
+
+    public void PowerUp()
+    {
+        // weaponPower++;
+        // weaponPower = Mathf.Clamp(weaponPower, 0, 2);
+        weaponPower = Mathf.Min(++weaponPower, 2);
+    }
+
+    void PowerDown()
+    {
+        weaponPower = Mathf.Max(--weaponPower, 0);
     }
 
     #endregion

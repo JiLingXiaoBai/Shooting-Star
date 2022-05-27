@@ -1150,6 +1150,25 @@ MonoBehaviour:
   - prefab: {fileID: 7203458116342931450, guid: 975f9549f84dd594a84456abeb05e287,
       type: 3}
     size: 3
+  lootItemPools:
+  - prefab: {fileID: 2019851316260838503, guid: 3281a09cc02e0e3478edeb13d697cd38,
+      type: 3}
+    size: 5
+  - prefab: {fileID: 2019851316260838503, guid: 652b6f2b6b236e44da76ff8c43307fd4,
+      type: 3}
+    size: 3
+  - prefab: {fileID: 5921898909932458412, guid: 853e9cf2d19d10a44947898a95b33246,
+      type: 3}
+    size: 3
+  - prefab: {fileID: 1604554900472224324, guid: f85c5fe7e46557a44a51545100a28c3c,
+      type: 3}
+    size: 5
+  - prefab: {fileID: 7946695540464534128, guid: 286b3ebf9063d1b4fa7d2acb14489695,
+      type: 3}
+    size: 3
+  - prefab: {fileID: 7021913161279593451, guid: 58293df6629a1ca41945239608f9b6ba,
+      type: 3}
+    size: 3
 --- !u!1 &460337818
 GameObject:
   m_ObjectHideFlags: 0
