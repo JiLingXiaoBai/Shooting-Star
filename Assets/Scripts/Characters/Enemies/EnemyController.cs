@@ -13,12 +13,16 @@ public class EnemyController : MonoBehaviour
     [SerializeField] protected GameObject[] projectiles;
     [SerializeField] protected AudioData[] projectileLaunchSFX;
     [SerializeField] protected Transform muzzle;
+    [SerializeField] protected ParticleSystem muzzleVFX;
     [SerializeField] protected float minFireInterval;
     [SerializeField] protected float maxFireInterval;
 
     WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
-    float paddingX;
+
+    protected float paddingX;
     float paddingY;
+
+    protected Vector3 targetPosition;
 
     protected virtual void Awake()
     {
@@ -27,7 +31,7 @@ public class EnemyController : MonoBehaviour
         paddingY = size.y / 2f;
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         StartCoroutine(nameof(RandomlyMovingCoroutine));
         StartCoroutine(nameof(RandomlyFireCoroutine));
@@ -41,7 +45,7 @@ public class EnemyController : MonoBehaviour
     IEnumerator RandomlyMovingCoroutine()
     {
         transform.position = Viewport.Instance.RandomEnemySpawnPosition(paddingX, paddingY);
-        Vector3 targetPosition = Viewport.Instance.RandomRightHalfPosition(paddingX, paddingY);
+        targetPosition = Viewport.Instance.RandomRightHalfPosition(paddingX, paddingY);
 
         while (gameObject.activeSelf)
         {
@@ -76,6 +80,7 @@ public class EnemyController : MonoBehaviour
                 PoolManager.Release(projectile, muzzle.position);
             }
             AudioManager.Instance.PlayRandomSFX(projectileLaunchSFX);
+            muzzleVFX.Play();
         }
     }
 }

@@ -21,6 +21,7 @@ public class Player : Character
     [SerializeField] GameObject projectile2;
     [SerializeField] GameObject projectile3;
     [SerializeField] GameObject projectileOverdrive;
+    [SerializeField] ParticleSystem muzzleVFX;
     [SerializeField] Transform muzzleMiddle;
     [SerializeField] Transform muzzleTop;
     [SerializeField] Transform muzzleBottom;
@@ -44,6 +45,7 @@ public class Player : Character
     bool isOverdriving = false;
 
     readonly float slowMotionDuration = 1f;
+    readonly float invincibleTime = 1f;
     float paddingX;
     float paddingY;
     float currentRoll;
@@ -58,6 +60,7 @@ public class Player : Character
     WaitForSeconds waitForOverdriveFireInterval;
     WaitForSeconds waitHealthRegenerateTime;
     WaitForSeconds waitDecelerationTime;
+    WaitForSeconds waitInvincibleTime;
     WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
     Coroutine moveCoroutine;
@@ -85,6 +88,7 @@ public class Player : Character
         waitForOverdriveFireInterval = new WaitForSeconds(fireInterval / overdriveFireFactor);
         waitHealthRegenerateTime = new WaitForSeconds(healthRegenerateTime);
         waitDecelerationTime = new WaitForSeconds(decelerationTime);
+        waitInvincibleTime = new WaitForSeconds(invincibleTime);
     }
 
     protected override void OnEnable()
@@ -133,6 +137,7 @@ public class Player : Character
         if (gameObject.activeSelf)
         {
             Move(moveDirection);
+            StartCoroutine(nameof(InvincibleCoroutine));
             if (regenerateHealth)
             {
                 if (healthRegenerateCoroutine != null)
@@ -157,6 +162,14 @@ public class Player : Character
         statsBar_HUD.UpdateStats(0f, maxHealth);
         base.Die();
     }
+
+    IEnumerator InvincibleCoroutine()
+    {
+        collider.isTrigger = true;
+        yield return waitInvincibleTime;
+        collider.isTrigger = false;
+    }
+
     #endregion
 
     #region MOVE
@@ -180,7 +193,8 @@ public class Player : Character
         {
             StopCoroutine(moveCoroutine);
         }
-        moveCoroutine = StartCoroutine(MoveCoroutine(decelerationTime, Vector2.zero, Quaternion.identity));
+        moveDirection = Vector2.zero;
+        moveCoroutine = StartCoroutine(MoveCoroutine(decelerationTime, moveDirection, Quaternion.identity));
         StartCoroutine(nameof(DecelerationCoroutine));
     }
 
@@ -219,11 +233,13 @@ public class Player : Character
 
     void Fire()
     {
+        muzzleVFX.Play();
         StartCoroutine(nameof(FireCoroutine));
     }
 
     void StopFire()
     {
+        muzzleVFX.Stop();
         StopCoroutine(nameof(FireCoroutine));
     }
 

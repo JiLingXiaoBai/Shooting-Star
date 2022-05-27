@@ -8,6 +8,8 @@ public class Viewport : Singleton<Viewport>
     float maxY;
     float middleX;
 
+    public float MaxX => maxX;
+
     private void Start()
     {
         Camera mainCamera = Camera.main;
