@@ -2,6 +2,56 @@
     "name": "InputActions",
     "maps": [
         {
+            "name": "MainMenu",
+            "id": "9ab4d029-4d16-416c-9a02-36fdf2face58",
+            "actions": [
+                {
+                    "name": "Option",
+                    "type": "Button",
+                    "id": "e241006c-64a7-4808-a688-b24a2d6850ce",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cf7968f1-7ff1-4a94-8c50-bb6a205e30ba",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Option",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7df34a63-c66e-47bb-ad3e-144881eb8791",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Option",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1883264-1200-4455-bf8e-5b849928b3de",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Option",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "Gameplay",
             "id": "2ec7b64d-00b6-4175-92e2-e5b04f04edc3",
             "actions": [

@@ -24,6 +24,56 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     ""name"": ""InputActions"",
     ""maps"": [
         {
+            ""name"": ""MainMenu"",
+            ""id"": ""9ab4d029-4d16-416c-9a02-36fdf2face58"",
+            ""actions"": [
+                {
+                    ""name"": ""Option"",
+                    ""type"": ""Button"",
+                    ""id"": ""e241006c-64a7-4808-a688-b24a2d6850ce"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""cf7968f1-7ff1-4a94-8c50-bb6a205e30ba"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Option"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7df34a63-c66e-47bb-ad3e-144881eb8791"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Option"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1883264-1200-4455-bf8e-5b849928b3de"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Option"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
             ""name"": ""Gameplay"",
             ""id"": ""2ec7b64d-00b6-4175-92e2-e5b04f04edc3"",
             ""actions"": [
@@ -573,6 +623,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         }
     ]
 }");
+        // MainMenu
+        m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
+        m_MainMenu_Option = m_MainMenu.FindAction("Option", throwIfNotFound: true);
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
@@ -642,6 +695,39 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     {
         return asset.FindBinding(bindingMask, out action);
     }
+
+    // MainMenu
+    private readonly InputActionMap m_MainMenu;
+    private IMainMenuActions m_MainMenuActionsCallbackInterface;
+    private readonly InputAction m_MainMenu_Option;
+    public struct MainMenuActions
+    {
+        private @InputActions m_Wrapper;
+        public MainMenuActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Option => m_Wrapper.m_MainMenu_Option;
+        public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MainMenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMainMenuActions instance)
+        {
+            if (m_Wrapper.m_MainMenuActionsCallbackInterface != null)
+            {
+                @Option.started -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnOption;
+                @Option.performed -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnOption;
+                @Option.canceled -= m_Wrapper.m_MainMenuActionsCallbackInterface.OnOption;
+            }
+            m_Wrapper.m_MainMenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Option.started += instance.OnOption;
+                @Option.performed += instance.OnOption;
+                @Option.canceled += instance.OnOption;
+            }
+        }
+    }
+    public MainMenuActions @MainMenu => new MainMenuActions(this);
 
     // Gameplay
     private readonly InputActionMap m_Gameplay;
@@ -789,6 +875,10 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
             if (m_PCSchemeIndex == -1) m_PCSchemeIndex = asset.FindControlSchemeIndex("PC");
             return asset.controlSchemes[m_PCSchemeIndex];
         }
+    }
+    public interface IMainMenuActions
+    {
+        void OnOption(InputAction.CallbackContext context);
     }
     public interface IGameplayActions
     {

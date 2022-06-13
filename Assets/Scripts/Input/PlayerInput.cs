@@ -5,6 +5,7 @@ using UnityEngine.Events;
 [CreateAssetMenu(menuName = "Player Input")]
 public class PlayerInput :
     ScriptableObject,
+    InputActions.IMainMenuActions,
     InputActions.IGameplayActions,
     InputActions.IPauseMenuActions,
     InputActions.IGameOverScreenActions
@@ -22,11 +23,15 @@ public class PlayerInput :
     public event UnityAction onLaunchMissile = delegate { };
     public event UnityAction onConfirmGameOver = delegate { };
 
+    public event UnityAction onMainMenuOptions = delegate { };
+
     InputActions inputActions;
 
     public void SwitchToDynamicUpdateMode() => InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate;
 
     public void SwitchToFixedUpdateMode() => InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInFixedUpdate;
+
+    public void EnableMainMenuInput() => SwitchActionMap(inputActions.MainMenu, true);
 
     public void EnableGameplayInput() => SwitchActionMap(inputActions.Gameplay, false);
 
@@ -39,6 +44,7 @@ public class PlayerInput :
     private void OnEnable()
     {
         inputActions = new InputActions();
+        inputActions.MainMenu.SetCallbacks(this);
         inputActions.Gameplay.SetCallbacks(this);
         inputActions.PauseMenu.SetCallbacks(this);
         inputActions.GameOverScreen.SetCallbacks(this);
@@ -137,6 +143,14 @@ public class PlayerInput :
         if (context.performed)
         {
             onConfirmGameOver.Invoke();
+        }
+    }
+
+    public void OnOption(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            onMainMenuOptions.Invoke();
         }
     }
 }

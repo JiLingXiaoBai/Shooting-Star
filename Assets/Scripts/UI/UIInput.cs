@@ -12,6 +12,7 @@ public class UIInput : Singleton<UIInput>
     protected override void Awake()
     {
         base.Awake();
+        ButtonPressedBehaviour.buttonFunctionTable = new Dictionary<string, System.Action>();
         UIInputModule = GetComponent<InputSystemUIInputModule>();
         UIInputModule.enabled = false;
     }
